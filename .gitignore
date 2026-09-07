@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# EEG dataset — DO NOT upload to GitHub
+data/auditory-eeg/
+data/*.zip
+
+# Experiment cache / generated data
+eeg_features.csv
+results/*.csv
+results/tables/
+results/figures/
+
+# OS/editor files
+.DS_Store
+.vscode/
