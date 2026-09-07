@@ -16,3 +16,10 @@ results/figures/
 # OS/editor files
 .DS_Store
 .vscode/
+
+# PhysioNet Auditory EEG dataset
+data/auditory-eeg/
+EOFcat >> .gitignore <<'EOF'
+
+# PhysioNet Auditory EEG dataset
+data/auditory-eeg/
