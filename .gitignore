@@ -1,25 +1,27 @@
+# Python
 .venv/
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
 
-# EEG dataset — DO NOT upload to GitHub
-data/auditory-eeg/
-data/*.zip
+# Environment / secrets
+.env
+.env.*
 
-# Experiment cache / generated data
+# EEG dataset — DO NOT upload to GitHub
+data/physionet.org/
+physionet.org/
+
+# Other dataset archives
+data/*.zip
+*.zip
+
+# Generated experiment outputs
 eeg_features.csv
 results/*.csv
 results/tables/
 results/figures/
 
-# OS/editor files
+# OS / editor files
 .DS_Store
 .vscode/
-
-# PhysioNet Auditory EEG dataset
-data/auditory-eeg/
-EOFcat >> .gitignore <<'EOF'
-
-# PhysioNet Auditory EEG dataset
-data/auditory-eeg/
