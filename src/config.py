@@ -1,19 +1,20 @@
 from pathlib import Path
 
-# Project paths
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = PROJECT_ROOT / "data" / "auditory-eeg" / "1.0.0"
+
+# Dataset
+DATA_DIR = PROJECT_ROOT / "data" / "physionet.org" / "files" / "auditory-eeg" / "1.0.0"
 FILTERED_DIR = DATA_DIR / "Filtered_Data"
 
+# Results
 RESULTS_DIR = PROJECT_ROOT / "results"
 TABLES_DIR = RESULTS_DIR / "tables"
 FIGURES_DIR = RESULTS_DIR / "figures"
 
 # EEG settings
 FS = 200
-CHANNELS = ["T7", "F8", "Cz", "P4"]
+CHANNELS = ["P4", "Cz", "F8", "T7"]
 
-# Windowing
 WINDOW_SECONDS = 4
 WINDOW_SAMPLES = FS * WINDOW_SECONDS
 
@@ -27,5 +28,4 @@ CONDITIONS = {
     10: "Neutral_Bone",
 }
 
-# Models
 RANDOM_STATE = 42
