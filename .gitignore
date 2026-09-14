@@ -1,27 +1,73 @@
-# Python
+# ==============================
+# Dataset
+# ==============================
+
+# Do not upload the PhysioNet EEG dataset
+data/
+
+
+# ==============================
+# Python environments
+# ==============================
+
 .venv/
+venv/
+env/
+
+
+# ==============================
+# Python cache
+# ==============================
+
 __pycache__/
 *.py[cod]
-.ipynb_checkpoints/
+*$py.class
 
-# Environment / secrets
+
+# ==============================
+# Environment variables / secrets
+# ==============================
+
 .env
 .env.*
+*.key
+*.pem
 
-# EEG dataset — DO NOT upload to GitHub
-data/physionet.org/
-physionet.org/
 
-# Other dataset archives
-data/*.zip
-*.zip
+# ==============================
+# Jupyter
+# ==============================
 
-# Generated experiment outputs
-eeg_features.csv
-results/*.csv
-results/tables/
-results/figures/
+.ipynb_checkpoints/
 
-# OS / editor files
-.DS_Store
+
+# ==============================
+# IDE / editor
+# ==============================
+
 .vscode/
+.idea/
+
+
+# ==============================
+# Operating system files
+# ==============================
+
+.DS_Store
+Thumbs.db
+
+
+# ==============================
+# Intermediate generated dataset
+# ==============================
+
+results/tables/eeg_features.csv
+
+
+# ==============================
+# Temporary files
+# ==============================
+
+*.log
+*.tmp
+*.bak
