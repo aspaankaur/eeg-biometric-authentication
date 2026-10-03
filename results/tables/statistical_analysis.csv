@@ -1,0 +1,2 @@
+comparison,mean_improvement_pp,ci_lower_pp,ci_upper_pp,wilcoxon_statistic,wilcoxon_p_value,cohens_dz
+5-condition vs 1-condition,6.819540229885056,6.102298850574708,7.59137931034483,21.0,0.015625,6.664385893325119
