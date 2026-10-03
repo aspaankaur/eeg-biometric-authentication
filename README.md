@@ -272,9 +272,169 @@ The results should therefore be interpreted as an experimental evaluation of cro
 
 ## Citation
 
-This project uses the **Auditory Evoked Potential EEG-Biometric Dataset** available through PhysioNet.
+This project uses the **Auditory Evoked Potential EEG-Biometric Dataset**, publicly available through PhysioNet.
 
-If you use the dataset in academic work, please cite the original dataset and its associated publication.
+If you use this repository or reproduce the experiments, please cite the original dataset and its associated publication.
+
+### Dataset
+
+N. Abo Alzahab et al.,  
+**"Auditory Evoked Potential EEG-Biometric Dataset,"**  
+PhysioNet, Version 1.0.0.
+
+Dataset: https://physionet.org/content/auditory-eeg/1.0.0/
+
+### Associated Publication
+
+N. Abo Alzahab et al.,  
+**"Auditory evoked potential electroencephalography-biometric dataset,"**  
+*Data in Brief*, vol. 57, Art. no. 111065, 2024.
+
+DOI: https://doi.org/10.1016/j.dib.2024.111065
+
+
+## Multi-Condition Enrollment Experiments
+
+As an extension of the cross-condition EEG biometric experiments, this repository also investigates whether using multiple auditory conditions during enrollment improves identification performance under an unseen auditory condition.
+
+### Research Questions
+
+The experiments investigate:
+
+1. Does increasing the number of auditory conditions used during enrollment improve identification under an unseen condition?
+2. Does the improvement remain when the total amount of training data is kept constant?
+3. Can a smaller subset of EEG features retain most of the identification performance?
+
+### Multi-Condition Enrollment
+
+For each experiment, one auditory condition is completely excluded from training and used as the unseen test condition.
+
+The remaining conditions are combined to create enrollment sets containing 1, 2, 3, or 5 auditory conditions.
+
+Mean unseen-condition performance:
+
+| Enrollment Conditions | Accuracy | Macro F1 |
+|---:|---:|---:|
+| 1 | 71.52% | 70.00% |
+| 2 | 78.12% | 77.25% |
+| 3 | 80.90% | 80.18% |
+| 5 | 82.79% | 82.25% |
+
+Increasing enrollment diversity from one to five conditions improved mean unseen-condition accuracy by 11.27 percentage points.
+
+### Data-Volume-Controlled Experiment
+
+Using more enrollment conditions also increases the amount of available training data. To separate this effect from condition diversity, an additional experiment uses the same training budget of 580 EEG windows for every enrollment size.
+
+| Enrollment Conditions | Accuracy | Macro F1 |
+|---:|---:|---:|
+| 1 | 71.52% | 70.02% |
+| 2 | 75.94% | 75.05% |
+| 3 | 77.40% | 76.61% |
+| 5 | 78.34% | 77.65% |
+
+With the training volume held constant, five-condition enrollment still improved accuracy by 6.82 percentage points over single-condition enrollment.
+
+The improvement was positive across all six unseen target conditions.
+
+Statistical analysis of the target-level improvement gave:
+
+- Mean improvement: 6.82 percentage points
+- 95% bootstrap confidence interval: 6.10–7.59 percentage points
+- One-sided Wilcoxon signed-rank test: W = 21, p = 0.0156
+
+### Feature Selection
+
+Condition-robust feature selection was also evaluated using the Top 10, 20, 30, and all 64 EEG features.
+
+| Features | Accuracy | Macro F1 |
+|---:|---:|---:|
+| 10 | 71.24% | 70.61% |
+| 20 | 79.54% | 78.96% |
+| 30 | 81.29% | 80.77% |
+| 64 | 82.79% | 82.25% |
+
+Using 30 features retained most of the full-model performance while reducing the feature dimensionality by 53.1%.
+
+Several features were consistently ranked highly across the six unseen-condition experiments. In particular, absolute beta-power features from P4, Cz, F8, and T7 appeared among the Top 10 features for every held-out condition.
+
+## Reproducing the Multi-Condition Experiments
+
+Activate the project environment before running the experiments.
+
+```bash
+source .venv/bin/activate
+```
+
+Run the multi-condition enrollment experiment:
+
+```bash
+python src/multicondition_enrollment.py
+```
+
+Run the data-volume-controlled experiment:
+
+```bash
+python src/controlled_enrollment_experiment.py
+```
+
+Run the feature-selection experiment:
+
+```bash
+python src/feature_selection_experiment.py
+```
+
+Run the statistical analysis:
+
+```bash
+python src/statistical_analysis.py
+```
+
+Generate the multi-condition performance figure:
+
+```bash
+python src/plot_multicondition_results.py
+```
+
+The generated tables are stored in:
+
+```text
+results/tables/
+```
+
+and figures are stored in:
+
+```text
+results/figures/
+```
+
+### Main Output Files
+
+Key outputs include:
+
+```text
+results/
+├── figures/
+│   └── accuracy_vs_enrollment_conditions.png
+│
+└── tables/
+    ├── multicondition_enrollment_results.csv
+    ├── multicondition_enrollment_summary.csv
+    ├── multicondition_target_summary.csv
+    ├── controlled_enrollment_results.csv
+    ├── controlled_enrollment_summary.csv
+    ├── controlled_enrollment_target_summary.csv
+    ├── feature_selection_results.csv
+    ├── feature_rankings.csv
+    ├── feature_stability.csv
+    └── statistical_analysis.csv
+```
+
+## Reproducibility Note
+
+The EEG dataset itself is not included in this repository due to its size. Download the Auditory Evoked Potential EEG-Biometric Dataset from PhysioNet and place the filtered recordings in the directory structure described above before running the experiments.
+
+Random seeds are fixed where applicable to improve reproducibility of the reported results.
 
 ## Author
 
